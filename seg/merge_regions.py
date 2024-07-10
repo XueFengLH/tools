@@ -56,7 +56,7 @@ def r_json(file_path):
 
 
 if __name__ == '__main__':
-    path = '/mnt/sda2/share/json_labels'
+    path = '/mnt/sda2/code/ultralytics/data_2/json_labels'
     dir_list = os.listdir(path)
     for dir in tqdm(dir_list):
         file_path = os.path.join(path, dir)
