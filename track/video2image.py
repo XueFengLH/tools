@@ -28,9 +28,9 @@ def video_to_image(video_path,save_path):
     video_name = os.path.basename(video_path)
 
     image_dir = re.sub('\.', '_', video_name)
-    image_dir = os.path.join(save_path, image_dir.replace('mp4',''))
+    image_dir = os.path.join(save_path, image_dir.replace('mp4','') + "/img")
     if not os.path.exists(image_dir):
-        os.mkdir(image_dir)
+        os.makedirs(image_dir)
 
     cap = cv.VideoCapture(video_path)
     # Define the codec and create VideoWriter object
@@ -47,7 +47,7 @@ def video_to_image(video_path,save_path):
     n = 0
     new_img_num = 0
     old_img_num = 0
-    with tqdm.tqdm(total=zhen_shu) as pbar:
+    with tqdm.tqdm(total=zhen_shu-1) as pbar:
         while (cap.isOpened()):
             ret, frame = cap.read()
             if ret == True:
@@ -90,9 +90,9 @@ ext = ('.h264', '.MOV')
 # video_to_image(p)
 
 # search(wdir)
-wdir = '/mnt/sda3/video'
+wdir = '/home/spring/nfs_client/face_data/video'
 for dirpath, dirname, filename in os.walk(wdir):
     for f in filename:
         if f.endswith('.mp4'):
             video_path = os.path.join(dirpath, f)
-            video_to_image(video_path,save_path='/home/spring/nfs_client/face_data/video_img')
+            video_to_image(video_path,save_path='/home/spring/nfs_client/face_data/video_image')
